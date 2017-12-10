@@ -1,0 +1,58 @@
+Global scopes
+=====
+Global scopes allow you to add constraints to all queries for a given model
+Writing global scopes
+==========
+Writing a global scope is simple. Define a class that implements the  
+Illuminate\Database\Eloquent\Scope interface.
+ This interface requires you to implement one method: apply. 
+The apply method may add where constraints to the query as needed:
+/**
+     * Apply the scope to a given Eloquent query builder.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $builder
+     * @param  \Illuminate\Database\Eloquent\Model  $model
+     * @return void
+     */
+     create new scope file with App\scopes--AgeScopes.php
+    public function apply(Builder $builder, Model $model)
+    {
+        $builder->where('age', '>', 200);
+    }
+use App\Scopes\AgeScopes;
+/////when model call boot method automatically call
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new AgeScope);
+    }
+ After adding the scope, a query to User::all() will produce the following SQL:
+select * from `users` where `age` > 200
+Removing Global Scopes
+=====================
+User::withoutGlobalScope(AgeScope::class)->get();
+// Remove all of the global scopes...
+User::withoutGlobalScopes()->get();
+
+// Remove some of the global scopes...
+User::withoutGlobalScopes([
+    FirstScope::class, SecondScope::class
+])->get();
+Local scopes
+===========
+Local scopes allow you to define common sets of constraints that you may easily re-use throughout your application. 
+
+     public function scopeActive($query)
+    {
+        return $query->where('active', 1);
+    }
+    public function scopeActive($query)
+    {
+        return $query->where('active', 1);
+    }
+    Utilizing A Local Scope
+    ======================
+    Once the scope has been defined, you may call the scope methods when querying the model. 
+    $users = App\User::popular()->active()->orderBy('created_at')->get();
+    

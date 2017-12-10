@@ -1,0 +1,159 @@
+1. __()
+The __ function translates the given translation string or translation key using your localization files:
+
+2. camel_case()
+========================
+The camel_case function converts the given string to camelCase:
+$converted = camel_case('foo bar');
+// fooBar
+
+3. class_basename()
+==============
+The class_basename returns the class name of the given class with the class' namespace removed:
+$class = class_basename('Foo\Bar\Baz');
+// Baz
+4. e()
+=========================
+The e function runs PHP's htmlspecialchars function with the double_encode option set to false:
+echo e('<html>foo</html>');
+// &lt;html&gt;foo&lt;/html&gt;
+5. ends_with()
+=============================
+The ends_with function determines if the given string ends with the given value:
+$result = ends_with('This is my name', 'name');
+// true
+6. kebab_case()
+======================
+The kebab_case function converts the given string to kebab-case:
+$converted = kebab_case('fooBar');
+// foo-bar
+7. preg_replace_array()
+====================================
+The preg_replace_array function replaces a given pattern in the string sequentially using an array:
+$string = 'The event will take place between :start and :end';
+$replaced = preg_replace_array('/:[a-z_]+/', ['8:30', '9:00'], $string);
+// The event will take place between 8:30 and 9:00
+8. snake_case()
+====================
+The snake_case function converts the given string to snake_case:
+$converted = snake_case('fooBar');
+// foo_bar
+9. starts_with()
+The starts_with function determines if the given string begins with the given value:
+$result = starts_with('This is my name', 'This');
+// true
+10.str_after()
+===========================
+The str_after function returns everything after the given value in a string:
+$slice = str_after('This is my name', 'This is');
+// ' my name'
+11.str_before()
+===========================
+The str_before function returns everything before the given value in a string:
+$slice = str_before('This is my name', 'my name');
+// 'This is '
+12. str_contains()
+========================
+The str_contains function determines if the given string contains the given value:
+$contains = str_contains('This is my name', 'my');
+// true
+You may also pass an array of values to determine if the given string contains any of the values:
+$contains = str_contains('This is my name', ['my', 'foo']);
+// true
+13. str_finish()
+===============
+The str_finish function adds a single instance of the given value to a string if it does not already end with the value:
+$adjusted = str_finish('this/string', '/');
+// this/string/
+14. str_is()
+========================
+The str_is function determines if a given string matches a given pattern. 
+Asterisks may be used to indicate wildcards:
+$matches = str_is('foo*', 'foobar');
+// true
+$matches = str_is('baz*', 'foobar');
+// false
+15. str_limit()
+===============
+The str_limit function truncates the given string at the specified length:
+$truncated = str_limit('The quick brown fox jumps over the lazy dog', 20);
+// The quick brown fox...
+You may also pass a third argument to change the string that will be appended to the end:
+$truncated = str_limit('The quick brown fox jumps over the lazy dog', 20, ' (...)');
+// The quick brown fox (...)
+16. str_plural()
+===========================
+The str_plural function converts a string to its plural form. This function currently only supports the English language:
+$plural = str_plural('car');
+// cars
+$plural = str_plural('child');
+// children
+You may provide an integer as a second argument to the function to retrieve the singular or plural form of the string:
+$plural = str_plural('child', 2);
+// children
+$plural = str_plural('child', 1);
+// child
+17. str_random()
+====================================
+The str_random function generates a random string of the specified length. 
+This function uses PHP's  random_bytes function:
+$random = str_random(40);
+18. str_replace_array()
+=============================
+The str_replace_array function replaces a given value in the string sequentially using an array:
+$string = 'The event will take place between ? and ?';
+$replaced = str_replace_array('?', ['8:30', '9:00'], $string);
+// The event will take place between 8:30 and 9:00
+19. str_replace_first()
+==================================
+The str_replace_first function replaces the first occurrence of a given value in a string:
+$replaced = str_replace_first('the', 'a', 'the quick brown fox jumps over the lazy dog');
+// a quick brown fox jumps over the lazy dog
+20. str_replace_last()
+======================================================
+The str_replace_last function replaces the last occurrence of a given value in a string:
+$replaced = str_replace_last('the', 'a', 'the quick brown fox jumps over the lazy dog');
+// the quick brown fox jumps over a lazy dog
+21. str_singular()
+========================
+The str_singular function converts a string to its singular form. This function currently only supports the English language:
+$singular = str_singular('cars');
+// car
+$singular = str_singular('children');
+// child
+22. str_slug()
+=======================
+The str_slug function generates a URL friendly "slug" from the given string:
+$slug = str_slug('Laravel 5 Framework', '-');
+// laravel-5-framework
+23. str_start()
+============================
+The str_start function adds a single instance of the given value to a string 
+if it does not already start with the value:
+$adjusted = str_start('this/string', '/');
+// /this/string
+$adjusted = str_start('/this/string/', '/');
+// /this/string
+24. studly_case()
+=============================
+The studly_case function converts the given string to StudlyCase:
+$converted = studly_case('foo_bar');
+// FooBar
+25. title_case()
+====================
+The title_case function converts the given string to Title Case:
+$converted = title_case('a nice title uses the correct case');
+// A Nice Title Uses The Correct Case
+26. trans()
+==========================
+The trans function translates the given translation key using your localization files:
+echo trans('messages.welcome');
+If the specified translation key does not exist,
+ the trans function will simply return the given key. So, using the example above, 
+ the trans function would return messages.welcome if the translation key does not exist.
+27. trans_choice()
+===============================
+The trans_choice function translates the given translation key with inflection:
+echo trans_choice('messages.notifications', $unreadCount);
+If the specified translation key does not exist, the trans_choice function will simply return the given key. So, using the example above, 
+the trans_choice function would return messages.notifications if the translation key does not exist.

@@ -1,0 +1,75 @@
+https://stackoverflow.com/questions/21591384/how-do-i-get-all-of-the-results-from-a-hasmany-relationship-in-laravel
+https://stackoverflow.com/questions/38172857/how-to-select-specific-columns-in-laravel-eloquent
+Table::select('name','surname')->where('id', 1)->get();
+Table::where('id', 1)->get(['name','surname']);
+ModelName::all('column1', 'column2', 'column3');
+
+Database migration
+=========
+1. make migration file with artisan command
+php artisan make:migration create_category_table --create=category
+folder:-- database/migrations
+
+php artisan make:migration create_users_table --create=users
+
+php artisan make:model User
+php artisan make:model testModel --migration
+Running migration
+===============
+php artisan migrate
+
+Model Retriving Aggregates
+==================================
+$count = App\Flight::where('active', 1)->count();
+$max = App\Flight::where('active', 1)->max('price');
+
+Retrieving Single Models / Aggregates
+// Retrieve a model by its primary key...
+==========================================
+$flight = App\Flight::find(1);
+
+// Retrieve the first model matching the query constraints...
+==============================================================
+$flight = App\Flight::where('active', 1)->first(); 
+ $flights = App\Flight::find([1, 2, 3]);
+
+ Not Found Exceptions
+ ===============================================
+ $model = App\Flight::findOrFail(1);
+
+ Inserting Model
+ ========================
+   $flight = new Flight;
+   $flight->name = $request->name;
+   $flight->save();
+
+   Updates
+   ========================
+   $flight = App\Flight::find(1);
+    $flight->name = 'New Flight Name';
+    $flight->save();
+
+// Retrieve flight by name, or create it if it doesn't exist
+==============================================================
+$flight = App\Flight::firstOrCreate(['name' => 'Flight 10']);
+
+// Retrieve flight by name, or create it with the name and delayed attributes...
+====================================================================================
+$flight = App\Flight::firstOrCreate(
+    ['name' => 'Flight 10'], ['delayed' => 1]
+);
+* Indicates if the model should be timestamped.
+=================================================
+ public $timestamps = false;
+
+  * The table associated with the model.
+  ==================================
+  protected $table = 'my_flights';
+    primary key
+  ======================
+protected $primaryKey='my_flights_id'; //override the primary key/default it laravel assume will be 'id' and autoincrimenting
+COLLECTION in laravel model
+=========================
+For Eloquent methods like all and get which retrieve multiple results, 
+an instance of  Illuminate\Database\Eloquent\Collection will be returned. 
+The Collection class provides a variety of helpful methods for working with your Eloquent results:
