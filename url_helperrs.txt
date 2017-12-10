@@ -1,0 +1,22 @@
+action()
+========
+The action function generates a URL for the given controller action. 
+$url = action('HomeController@index')
+If the method accepts route parameters, you may pass them as the second argument to the method:
+$url = action('UserController@profile', ['id' => 1]);
+asset()
+=========
+The asset function generates a URL for an asset using the current scheme of the request (HTTP or HTTPS):
+$url = asset('img/photo.jpg');
+secure_asset()
+==================
+The secure_asset function generates a URL for an asset using HTTPS:
+$url = secure_asset('img/photo.jpg');
+route()
+==================
+The route function generates a URL for the given named route:
+$url = route('routeName');
+If the route accepts parameters, you may pass them as the second argument to the method:
+$url = route('routeName', ['id' => 1]);
+By default, the route function generates an absolute URL. If you wish to generate a relative URL, you may pass false as the third argument:
+$url = route('routeName', ['id' => 1], false);
